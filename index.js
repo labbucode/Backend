@@ -4,10 +4,12 @@ const connectDB  = require('./connectDB')
 require('dotenv').config();
 const authRouter = require('./router/authRouter');
 const lisitngsRouter = require('./router/listingsRouter')
-
+const cors = require('cors')
 const PORT = 5001;
 
-
+app.use(cors({
+    origin:['http://localhost:3000', 'http://localhost:5173','http://techprime-1f4c71nxi-labbucode.vercel.app']
+}))
 app.use(express.json())
 // home page
 
