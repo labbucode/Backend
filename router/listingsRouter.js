@@ -45,7 +45,7 @@ router.post('/',async (req, res) => {
         type,
         division,
         category,
-        proiority,
+        priority,
         department,
         location,
         status,
@@ -56,7 +56,7 @@ try {
         type,
         division,
         category,
-        proiority,
+        priority,
         department,
         location,
         status})
