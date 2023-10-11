@@ -8,7 +8,7 @@ const cors = require('cors')
 const PORT = 5001;
 
 app.use(cors({
-    origin:['http://localhost:3000', 'http://localhost:5173','http://techprime-1f4c71nxi-labbucode.vercel.app']
+    origin:['http://localhost:3000', 'http://localhost:5173','http://techprime-1f4c71nxi-labbucode.vercel.app','https://techprime-eight.vercel.app']
 }))
 app.use(express.json())
 // home page
