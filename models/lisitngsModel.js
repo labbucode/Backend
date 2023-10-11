@@ -9,7 +9,7 @@ const lisitngSchema = new Schema({
      type:String,
      division:String,
      category:String,
-     proiority:String,
+     priority:String,
      department:String,
      location:String,
      status:String,
