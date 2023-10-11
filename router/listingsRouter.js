@@ -38,6 +38,40 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/stats', async (req, res) => {
+    try {
+        const data = await lisitngModel.aggregate([
+            {
+                $group: {
+                    _id: "$status",
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        // Create an object to store the counts
+        const stats = {
+            Registered: 0,
+            Closed: 0,
+            Running: 0,
+            Cancelled:0
+            
+        };
+        let totalCount = 0;
+        // Populate the stats object with the counts
+        data.forEach(item => {
+            
+            stats[item._id] = item.count;
+            totalCount += item.count;
+        });
+        stats.total = totalCount;
+        res.json({...stats});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 
 router.post('/',async (req, res) => {
     const {   project_name,
