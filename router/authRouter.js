@@ -36,13 +36,11 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ Success: "False", message: 'Invalid User' });
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password); // Compare with the user's hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password); 
 
     if (!passwordMatch) {
       return res.status(401).json({ Success: "False", message: 'Invalid Password' });
     }
-
-    // At this point, authentication is successful
 
     const token = jwt.sign({ userId: user._id },ACCESS_SECRET_TOKEN, { expiresIn: '5h' });
 
