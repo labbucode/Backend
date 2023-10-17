@@ -73,8 +73,11 @@ router.post('/',async (req, res) => {
         category,
         priority,
         department,
+        startDate,
+        lastDate,
         location,
         status,
+
         } = req.body
 try {
    const data = await lisitngModel.create( {project_name,
@@ -84,6 +87,8 @@ try {
         category,
         priority,
         department,
+        startDate,
+        lastDate,
         location,
         status})
   if(!data) return
@@ -91,8 +96,6 @@ try {
 } catch(err){
  console.log(err);
 }
-   
-  
 });
 
 

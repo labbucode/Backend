@@ -12,9 +12,9 @@ const lisitngSchema = new Schema({
      priority:String,
      department:String,
      location:String,
+     startDate:String,
+     lastDate: String,
      status:String,
-     
-
 
   });
 

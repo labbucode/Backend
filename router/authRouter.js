@@ -5,6 +5,7 @@ const ACCESS_SECRET_TOKEN="af81a64c6180fe0daa0ff82b08c2c119f06d1f89443cab13ab606
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const { Long } = require('mongodb');
+
 require('dotenv').config()
 router.post('/register',async (req,res)=>{
   try{
@@ -51,10 +52,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
-
 module.exports = router;
-
-   
-
-
