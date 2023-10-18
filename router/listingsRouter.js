@@ -1,7 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const lisitngModel = require('../models/lisitngsModel')
+const jwt = require('jsonwebtoken');
+const userModel = require('../models/userModel');
+require('dotenv').config();
+const verifyJWT = require('../middleware/verifyJwt');
 
+
+// Define a middleware for JWT verification
+
+
+// Use the verifyJWT middleware in your route
 router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
@@ -16,21 +25,28 @@ router.get('/', async (req, res) => {
             .exec();
 
         const totalCount = await lisitngModel.countDocuments();
-
         const totalPages = Math.ceil(totalCount / limit);
 
-        res.json({
-            data,
-            page,
-            limit,
-            totalPages,
-            totalCount,
-        });
+
+        const user = req.user; // Access the decoded user from the request object
+        
+
+        
+            res.json({
+                data,
+                page,
+                limit,
+                totalPages,
+                totalCount,
+            });
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
     }
 });
+
+
 
 router.get('/stats', async (req, res) => {
     try {

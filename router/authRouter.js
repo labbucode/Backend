@@ -1,7 +1,8 @@
 const  express = require('express');
 const  router = express.Router();
 const userModel = require('../models/userModel')
-const ACCESS_SECRET_TOKEN="af81a64c6180fe0daa0ff82b08c2c119f06d1f89443cab13ab6065a9e1aab248"
+require('dotenv').config();
+
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const { Long } = require('mongodb');
@@ -13,6 +14,7 @@ router.post('/register',async (req,res)=>{
     const hashedPwd = await bcrypt.hash(password,10)
 
     const user = await userModel.findOne({ email });
+   
 
     if(user) return  res.json({"msg":"User Already Exist"})
     
@@ -43,9 +45,10 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ Success: "False", message: 'Invalid Password' });
     }
 
-    const token = jwt.sign({ userId: user._id },ACCESS_SECRET_TOKEN, { expiresIn: '5h' });
+    const token = jwt.sign({ userId: user._id },process.env.ACCESS_SECRET_TOKEN, { expiresIn: '5h' });
 
     res.json({ Success:"True",Messsage:"Valid USer",access: token });
+    
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Internal server error' });
