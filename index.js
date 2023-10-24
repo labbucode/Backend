@@ -4,7 +4,6 @@ const connectDB  = require('./connectDB')
 require('dotenv').config();
 const authRouter = require('./router/authRouter');
 const lisitngsRouter = require('./router/listingsRouter')
-const jwt = require('jsonwebtoken');
 const cors = require('cors')
 const PORT = 5001;
 const verifyJWT = require('./middleware/verifyJwt');
